@@ -1,40 +1,33 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"log"
-	"net/http"
 )
 
-// import (
-// 	"curso-go/math"
-// 	"fmt"
-// )
 
 func main() {
-	// a := 34
-	// b := "andre"
-	// c := 3.14
-	// d := true
-	// e := `teste \n linha 3`
+	
+	// aqui o erro é ignorado e não tratado aqui
+	// res, _ := soma(5, 5)
 
-	// fmt.Printf("%v %T\n", a, a)
-	// fmt.Printf("%v %T\n", b, b)
-	// fmt.Printf("%v %T\n", c, c)
-	// fmt.Printf("%v %T\n", d, d)
-	// fmt.Printf("%v %T\n", e, e)
-
-	// resultado := math.Soma(2, 4)
-	// resultado2 := math.SomaX(45)
-
-	// fmt.Printf("%v\n", resultado)
-	// fmt.Printf("%v\n", resultado2)
-
-	res, err := http.Get("http://googlesssscom.br")
+	res, err := soma(5, 5)
 
 	if err != nil {
-		log.Fatal(err.Error())
+		log.Fatal((err.Error()))
 	}
 
-	fmt.Printf("%v\n", res.Header)
+	fmt.Println(res)
+
 }
+
+func soma(x int, y int) (int, error) {
+	res := x + y
+
+	if res > 10 {
+		return 0, errors.New("Total maior que 10")
+	}
+
+	return res, nil
+} 
