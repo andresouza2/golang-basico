@@ -1,33 +1,52 @@
 package main
 
 import (
-	"errors"
 	"fmt"
-	"log"
 )
 
+type Carro struct {
+	Nome string
+}
+
+func (c Carro) Andar() {
+	fmt.Println(c.Nome, "andou")
+}
 
 func main() {
-	
-	// aqui o erro é ignorado e não tratado aqui
-	// res, _ := soma(5, 5)
 
-	res, err := soma(5, 5)
+	carro := Carro{Nome: "Gol"}
 
-	if err != nil {
-		log.Fatal((err.Error()))
-	}
+	carro.Andar()
 
-	fmt.Println(res)
+	resultado := func(x ...int) func() int {
+
+		res := 0
+
+		for _,v := range x {
+			res += v
+		}
+		return func() int {
+			return res * res
+		}
+
+	} 
+
+	// resultado := somaTudo(10, 5, 8, 20, 154, 1052)
+
+	fmt.Println(resultado(54, 54, 54, 54)())
 
 }
 
-func soma(x int, y int) (int, error) {
-	res := x + y
+func soma(x int, y int) (result int) {
+	result = x + y
+	return
+}
 
-	if res > 10 {
-		return 0, errors.New("Total maior que 10")
+func somaTudo(x ...int) int {
+	resultado := 0
+
+	for _,v := range x {
+		resultado += v
 	}
-
-	return res, nil
-} 
+	return resultado
+}
