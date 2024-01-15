@@ -1,52 +1,41 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 type Carro struct {
-	Nome string
+	Name string
 }
 
-func (c Carro) Andar() {
-	fmt.Println(c.Nome, "andou")
+func (c *Carro) andou() {
+	c.Name = "Fusca 2"
+	fmt.Println(c.Name, "andou")
 }
 
 func main() {
 
-	carro := Carro{Nome: "Gol"}
-
-	carro.Andar()
-
-	resultado := func(x ...int) func() int {
-
-		res := 0
-
-		for _,v := range x {
-			res += v
-		}
-		return func() int {
-			return res * res
-		}
-
-	} 
-
-	// resultado := somaTudo(10, 5, 8, 20, 154, 1052)
-
-	fmt.Println(resultado(54, 54, 54, 54)())
-
-}
-
-func soma(x int, y int) (result int) {
-	result = x + y
-	return
-}
-
-func somaTudo(x ...int) int {
-	resultado := 0
-
-	for _,v := range x {
-		resultado += v
+	carro := Carro{
+		Name: "Fusca",
 	}
-	return resultado
+
+	carro.andou()
+
+
+	// memoria-endereço(10) <-- a <-- 10
+
+	// a := 10
+	// var ponteiro *int = &a
+	// fmt.Println(ponteiro) // imprimo o endereço de memoria
+	// fmt.Println(*ponteiro) // imprimo o valor que está no endereço de memoria
+	// *ponteiro = 50 // altero o valor que está no endereço de memoria
+	// fmt.Println(a)
+	// fmt.Println(*ponteiro)
+
+	// variavel := 10
+	// abc(&variavel)
+	// fmt.Println(variavel)
+
 }
+
+// func abc(a *int) {
+// 	*a = 500
+// }
